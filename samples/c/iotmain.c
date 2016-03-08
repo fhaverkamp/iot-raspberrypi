@@ -55,6 +55,9 @@ int reconnect_delay(int i);
 //cpustat.c
 float getCPUTemp();
 float GetCPULoad();
+float GetOutsideTemp();
+float GetDistance();
+
 //mac.c
 char *getmac(char *iface);
 //jsonator.c
@@ -152,7 +155,8 @@ int main(int argc __attribute__((unused)),
 	}
 	while (1) {
 		JsonMessage json_message = { DEVICE_NAME, getCPUTemp(), sineVal(
-				MIN_VALUE, MAX_VALUE, 16, count), GetCPULoad() };
+				MIN_VALUE, MAX_VALUE, 16, count), GetCPULoad(),
+				GetOutsideTemp(), GetDistance() };
 		json = generateJSON(json_message);
 		res = publishMQTTMessage(&client, publishTopic, json);
 		syslog(LOG_DEBUG, "Posted the message with result code = %d\n", res);

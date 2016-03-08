@@ -26,6 +26,8 @@ char cpuloadloc[255] = "/proc/loadavg";
 
 float getCPUTemp();
 float GetCPULoad();
+float GetOutsideTemp();
+float GetDistance();
 
 float getCPUTemp() {
 	FILE * cputemp = NULL;
@@ -56,3 +58,24 @@ float GetCPULoad() {
         return (load1);
 
 }
+
+float GetOutsideTemp() {
+        FILE *fp;
+        float temp = 0.0;
+
+        fp = popen("/usr/local/bin/ds1820_read_10-000802f65bf8.sh", "r");
+        fscanf(fp, "%f", &temp);
+        pclose(fp);
+        return temp;
+}
+
+float GetDistance() {
+        FILE *fp;
+        float distance = 0.0;
+
+        fp = popen("/usr/local/bin/distance_read.py", "r");
+        fscanf(fp, "%f", &distance);
+        pclose(fp);
+        return distance;
+}
+

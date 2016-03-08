@@ -48,6 +48,14 @@ char * generateJSON(JsonMessage passedrpi ) {
 	sprintf(buffer, "%.2f", passedrpi.sine);
 	strcat(jsonReturned, buffer);
 
+	strcat(jsonReturned, "\"outsidetemp\":");
+	sprintf(buffer, "%.2f", passedrpi.outsidetemp);
+	strcat(jsonReturned, buffer);
+
+	strcat(jsonReturned, "\"distance\":");
+	sprintf(buffer, "%.2f", passedrpi.distance);
+	strcat(jsonReturned, buffer);
+
 	strcat(jsonReturned, "}");
 	strcat(jsonReturned, "}");
 

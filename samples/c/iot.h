@@ -19,15 +19,17 @@
 
 /* This is structure for the JSON */
 
-  struct json {
-	  char myname[100];
-	  float cputemp;
-	  float sine;
-	  float cpuload;
-  };
+struct json {
+	char myname[100];
+	float cputemp;
+	float sine;
+	float cpuload;
+	float outsidetemp;
+	float distance;
+};
 
-  /* This is the short hand for json */
-  typedef struct json JsonMessage;
+/* This is the short hand for json */
+typedef struct json JsonMessage;
 
 //constants
 #define MAXBUF 100

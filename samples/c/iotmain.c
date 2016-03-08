@@ -288,7 +288,8 @@ int get_config(char * filename, struct config * configstr) {
 	/* char str1[10], str2[10]; */
 	prop = fopen(filename, "r");
 	if (prop == NULL) {
-		syslog(LOG_INFO,"Config file not found. Going to Quickstart mode\n");
+		syslog(LOG_INFO,"Config file %s not found. Going to Quickstart mode\n",
+			filename);
 		return 0; // as the file is not present, it must be quickstart mode
 	}
 	char line[256];

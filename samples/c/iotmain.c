@@ -22,18 +22,18 @@
 #include <syslog.h>
 
 char configFile[50] = "/etc/iotsample-raspberrypi/device.cfg";
-float PI = 3.1415926;
-float MIN_VALUE = -1.0;
-float MAX_VALUE = 1.0;
+static const float PI = 3.1415926;
+static const float MIN_VALUE = -1.0;
+static const float MAX_VALUE = 1.0;
 
-char clientId[MAXBUF];
-char publishTopic[MAXBUF] = "iot-2/evt/status/fmt/json";
-char subscribeTopic[MAXBUF] = "iot-2/cmd/reboot/fmt/json";
+static char clientId[MAXBUF];
+static char publishTopic[MAXBUF] = "iot-2/evt/status/fmt/json";
+static char subscribeTopic[MAXBUF] = "iot-2/cmd/reboot/fmt/json";
 
 //flag to check if running in registered mode or quickstart mode
 // registered mode = 1
 // quickstart mode = 0
-int isRegistered = 0;
+static int isRegistered = 0;
 
 MQTTAsync client;
 
@@ -55,7 +55,8 @@ int reconnect_delay(int i);
 //cpustat.c
 float getCPUTemp();
 float GetCPULoad();
-float GetOutsideTemp();
+float GetOutsideTemp0();
+float GetOutsideTemp1();
 float GetDistance();
 
 //mac.c
@@ -156,7 +157,9 @@ int main(int argc __attribute__((unused)),
 	while (1) {
 		JsonMessage json_message = { DEVICE_NAME, getCPUTemp(), sineVal(
 				MIN_VALUE, MAX_VALUE, 16, count), GetCPULoad(),
-				GetOutsideTemp(), GetDistance() };
+				GetOutsideTemp0(),
+				GetOutsideTemp1(),
+				GetDistance() };
 		json = generateJSON(json_message);
 		res = publishMQTTMessage(&client, publishTopic, json);
 		syslog(LOG_DEBUG, "Posted the message with result code = %d\n", res);

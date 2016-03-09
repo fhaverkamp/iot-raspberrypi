@@ -26,7 +26,8 @@ char cpuloadloc[255] = "/proc/loadavg";
 
 float getCPUTemp();
 float GetCPULoad();
-float GetOutsideTemp();
+float GetOutsideTemp0();
+float GetOutsideTemp1();
 float GetDistance();
 
 float getCPUTemp() {
@@ -59,14 +60,22 @@ float GetCPULoad() {
 
 }
 
-float GetOutsideTemp() {
+static float GetOutsideTemp(const char *script) {
         FILE *fp;
         float temp = 0.0;
 
-        fp = popen("/usr/local/bin/ds1820_read_10-000802f65bf8.sh", "r");
+        fp = popen(script, "r");
         fscanf(fp, "%f", &temp);
         pclose(fp);
         return temp;
+}
+
+float GetOutsideTemp0() {
+	return GetOutsideTemp("/usr/local/bin/ds1820_read_10-000802f65bf8.sh");
+}
+
+float GetOutsideTemp1() {
+	return GetOutsideTemp("/usr/local/bin/ds1820_read_10-000802f964f1.sh");
 }
 
 float GetDistance() {

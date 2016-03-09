@@ -49,10 +49,15 @@ char * generateJSON(JsonMessage passedrpi ) {
 	strcat(jsonReturned, buffer);
         strcat(jsonReturned, ",");
 
-	strcat(jsonReturned, "\"outsidetemp\":");
-	sprintf(buffer, "%.2f", passedrpi.outsidetemp);
+	strcat(jsonReturned, "\"outsidetemp0\":");
+	sprintf(buffer, "%.2f", passedrpi.outsidetemp0);
 	strcat(jsonReturned, buffer);
         strcat(jsonReturned, ",");
+
+	strcat(jsonReturned, "\"outsidetemp1\":");
+	sprintf(buffer, "%.2f", passedrpi.outsidetemp1);
+	strcat(jsonReturned, buffer);
+	strcat(jsonReturned, ",");
 
 	strcat(jsonReturned, "\"distance\":");
 	sprintf(buffer, "%.2f", passedrpi.distance);

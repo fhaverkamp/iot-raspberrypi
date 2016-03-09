@@ -24,7 +24,8 @@ struct json {
 	float cputemp;
 	float sine;
 	float cpuload;
-	float outsidetemp;
+	float outsidetemp0;
+	float outsidetemp1;
 	float distance;
 };
 
